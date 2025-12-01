@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="kapilit.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% out.println("welcome to first page page of jsp");
-int i =90;
-out.println("the value of i is " + i);
+<% 
+response.setContentType("text/html");
+out.println("<form action='Second.jsp' >");
 
+String username = request.getParameter("user");
+String Password = request.getParameter("pass");
+out.println("Welcome to Mr  " + username + " your password is " + Password);
+Employee e1 = new Employee(11,"sahil", 21, 20000);
+session.setAttribute("emp" ,e1);
+out.println("</form >");
 %>
 </body>
 </html>
