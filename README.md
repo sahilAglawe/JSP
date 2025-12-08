@@ -1,171 +1,22 @@
-# 📘 JSP & Servlet Concepts – Quick Reference Guide
+# JSP & Servlet Concepts – Quick Summary
 
-This document covers the core JSP concepts including scripting elements, implicit objects, directives, action tags, useBean, MVC architecture, and DAO design pattern.
+## 1. Scripting Elements
+Java code written inside a JSP page using scriptlet, expression, or declaration tags.
 
----
+## 2. Implicit Objects
+Predefined objects in JSP like `request`, `response`, `session`, `out` that simplify data handling.
 
-## ✅ 1. Scripting Elements
+## 3. Directives
+Instructions to the JSP engine such as `page`, `include`, and `taglib` to control page behavior.
 
-### a) Scriptlet — `<% … %>`
-```jsp
-<%
-   int a = 10;
-   out.println("Value = " + a);
-%>
-b) Expression — <%= … %>
-jsp
-Copy code
-<%= "Hello JSP!" %>
-c) Declaration — <%! … %>
-jsp
-Copy code
-<%! 
-   int count = 0;
-   public int getCount(){ return ++count; }
-%>
-✅ 2. Implicit Objects
-Implicit Object	Description
-request	Request data from browser
-response	Sends response to browser
-session	Maintains user session
-application	ServletContext (application level)
-out	Prints output
-config	ServletConfig object
-pageContext	Access to all implicit objects
-page	Reference to current JSP page
-exception	Used in error JSP pages
+## 4. Action Elements
+JSP XML-based tags (`<jsp:useBean>`, `<jsp:include>`, `<jsp:forward>`) used for dynamic runtime operations.
 
-✅ 3. Directives
-a) Page Directive
-jsp
-Copy code
-<%@ page language="java" import="java.util.*" errorPage="error.jsp" %>
-b) Include Directive
-jsp
-Copy code
-<%@ include file="header.jsp" %>
-c) Taglib Directive
-jsp
-Copy code
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-✅ 4. Action Elements
-Action Element	Purpose
-<jsp:useBean>	Creates or finds bean
-<jsp:setProperty>	Sets bean property
-<jsp:getProperty>	Gets bean property
-<jsp:forward>	Forwards request
-<jsp:include>	Includes dynamic content
+## 5. UseBean
+JSP mechanism to create or access JavaBean objects and use setters/getters inside JSP.
 
-Example
-jsp
-Copy code
-<jsp:useBean id="emp" class="com.Employee" scope="session"/>
-<jsp:setProperty name="emp" property="name" value="Sahil"/>
-<jsp:getProperty name="emp" property="name"/>
-✅ 5. UseBean
-Syntax
-jsp
-Copy code
-<jsp:useBean id="obj" class="com.myclass.Employee" scope="session"/>
-With Set/Get
-jsp
-Copy code
-<jsp:setProperty name="obj" property="salary" value="50000"/>
-<jsp:getProperty name="obj" property="salary"/>
-Requirements
-No-arg constructor
+## 6. JSP MVC Architecture
+A design pattern separating application into Model (logic), View (JSP UI), and Controller (Servlet).
 
-Getter and Setter methods
-
-Follow JavaBean conventions
-
-✅ 6. JSP MVC Architecture
-Model
-Handles business logic and DB access.
-Examples:
-
-Employee.java
-
-EmployeeDAO.java
-
-View
-JSP pages (UI only)
-
-Controller
-Servlet
-Handles:
-
-Requests
-
-Responses
-
-Calling DAO
-
-Forwarding data to JSP
-
-MVC Flow
-css
-Copy code
-HTML/JSP → Servlet → DAO → Servlet → JSP → Browser
-✅ 7. Data Access Object (DAO)
-DAO separates business logic from database operations.
-
-Benefits
-Cleaner code
-
-Easier maintenance
-
-Reusable DB methods
-
-Industry standard
-
-Common DAO Methods
-save()
-
-update()
-
-delete()
-
-getEmployeeById()
-
-getAllEmployees()
-
-Example
-java
-Copy code
-public class EmployeeDAO {
-    public static int save(Employee e) {
-        Connection con = DBConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement(
-            "INSERT INTO employee VALUES(?,?,?,?)"
-        );
-        ...
-    }
-}
-Servlet uses:
-
-java
-Copy code
-EmployeeDAO.save(emp);
-🎉 End of Documentation
-yaml
-Copy code
-
----
-
-If you want, I can also generate a **downloadable README.md file**, or convert it into **PDF / DOCX**.
-
-2/2
-
-
-
-
-
-
-
-
-
-
-
-
-ChatGPT can make
+## 7. Data Access Object (DAO)
+A layer that contains all database operations, separating business logic from data logic.
